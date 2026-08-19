@@ -1,0 +1,20 @@
+name: C# Test
+on:
+  push:
+    paths:
+      - 'src/*.cs'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0'
+      - name: Restore packages
+        run: dotnet restore src/MyProject.csproj
+      - name: Run tests
+        run: dotnet test src/MyProject.csproj
